@@ -11,7 +11,7 @@ const Product = () => {
     },[])
     return (
         <div>
-            <h1>Laptops For You!</h1>
+            <h1 className="text-2xl font-bold my-6">Laptops For You!</h1>
             <div className="md:grid grid-cols-4 gap-4 my-4">
             {
                 products.map(product=><AllProduct
