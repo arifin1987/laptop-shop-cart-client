@@ -1,23 +1,29 @@
 /* eslint-disable react/prop-types */
 
 
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 const AllProduct = ({product}) => {
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     
     const { image, price, specification, model,_id } = product;
 
     const handleAddToCart = product =>{
         console.log(product);
-        const cartItem = { menuItemId: _id,image, price, specification, model}
+        if(user && user.email){
+        const cartItem = { menuItemId: _id,image, price, specification, model,email: user.email}
         console.log(cartItem);
         fetch('http://localhost:5000/carts',{
             method: 'POST',
             headers: {
-                'content-type':'applicaion/json'
+                'content-type':'application/json'
             },
             body:JSON.stringify(cartItem)
         })
@@ -35,6 +41,21 @@ const AllProduct = ({product}) => {
         })
 
     }
+    else{
+        Swal.fire({
+            title: 'Please login to order the Laptop',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Login now!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/login', {state: {from: location}})
+            }
+          })
+    }
+}
 
     return (
         <div >
@@ -62,7 +83,7 @@ const AllProduct = ({product}) => {
             
         </div>
         <button onClick={()=> handleAddToCart(product)} className="  my-4 rounded-3xl bg-white text-black border-black border-2 px-4 py-2">Add to Cart</button>
-            <Link to={`/allproducts/${_id}`}> <button className="  my-4 rounded-3xl bg-white text-black border-black border-2 px-4 py-2">View Details</button>  </Link>
+        <Link to={`/allproducts/${_id}`}> <button className="  my-4 rounded-3xl bg-white text-black border-black border-2 px-4 py-2">View Details</button>  </Link>
 
             </div>
             

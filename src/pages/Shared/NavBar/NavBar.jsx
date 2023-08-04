@@ -3,10 +3,12 @@ import {  FaPhone, FaShoppingCart} from 'react-icons/fa';
 import { RiAdminLine } from "react-icons/ri";
 import { CiShoppingCart } from "react-icons/ci";
 import {  MdOutlineKeyboardArrowDown } from "react-icons/md";
+import useCart from "../../../hooks/useCart";
 
 
 
 const NavBar = () => {
+  const [cart] = useCart();
   const navOptions = <>
     <li className="font-bold"><Link to="">  Categories <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown></Link></li>
     <li className="font-bold"><Link to="">Deals</Link></li>
@@ -14,7 +16,7 @@ const NavBar = () => {
     <li className="font-bold"><Link to="">Delivery</Link></li>
     <input type="text" placeholder="Search Product " className="input input-bordered w-24 md:w-auto"  />
     <li className="font-bold"><Link to="/login"><RiAdminLine></RiAdminLine> Account</Link></li>
-    <li className="font-bold"><Link to=""><FaShoppingCart></FaShoppingCart> Cart</Link></li>
+    <li className="font-bold"><Link to="/carts"><FaShoppingCart></FaShoppingCart> <div className="badge badge-secondary">+{cart?.length || 0}</div></Link></li>
 
   </>
   return (

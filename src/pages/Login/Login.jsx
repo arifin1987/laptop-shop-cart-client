@@ -70,7 +70,7 @@ const Login = () => {
                             </div>
                         </form>
                         <Link to='/signUp'>
-                            <button className="btn btn-link">New to car planet? Please Register</button>
+                            <button className="btn btn-link">New to Shopcart? Please Register</button>
                         </Link>
                         <button onClick={handleGoogleSignIn} className='bg-red-300 p-2 text-white rounded'>Google</button>
                        
