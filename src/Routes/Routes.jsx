@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         {
           path:'/allproducts/:id',
           element: <SingleProduct></SingleProduct>,
-          loader:({params})=>fetch(`http://localhost:5000/allproducts/${params.id}`)
+          loader:({params})=>fetch(` https://laptop-shop-cart-server.vercel.app/allproducts/${params.id}`)
 
         }
       ]

@@ -20,7 +20,7 @@ const AllProduct = ({product}) => {
         if(user && user.email){
         const cartItem = { menuItemId: _id,image, price, specification, model,email: user.email}
         console.log(cartItem);
-        fetch('http://localhost:5000/carts',{
+        fetch(' https://laptop-shop-cart-server.vercel.app/carts',{
             method: 'POST',
             headers: {
                 'content-type':'application/json'

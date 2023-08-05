@@ -7,7 +7,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 const Product = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/allproducts')
+        fetch(' https://laptop-shop-cart-server.vercel.app/allproducts')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
