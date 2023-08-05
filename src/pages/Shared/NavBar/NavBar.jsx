@@ -1,42 +1,56 @@
 import { Link } from "react-router-dom";
-import {  FaPhone, FaShoppingCart} from 'react-icons/fa';
+import { FaPhone, FaShoppingCart } from 'react-icons/fa';
 import { RiAdminLine } from "react-icons/ri";
 import { CiShoppingCart } from "react-icons/ci";
-import {  MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import useCart from "../../../hooks/useCart";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 
 
 const NavBar = () => {
   const [cart] = useCart();
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => { })
+      .catch(error => console.log(error));
+  }
   const navOptions = <>
     <li className="font-bold"><Link to="">  Categories <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown></Link></li>
     <li className="font-bold"><Link to="">Deals</Link></li>
     <li className="font-bold"><Link to="">What is New</Link></li>
     <li className="font-bold"><Link to="">Delivery</Link></li>
-    <input type="text" placeholder="Search Product " className="input input-bordered w-24 md:w-auto"  />
-    <li className="font-bold"><Link to="/login"><RiAdminLine></RiAdminLine> Account</Link></li>
-    <li className="font-bold"><Link to="/carts"><FaShoppingCart></FaShoppingCart> <div className="badge badge-secondary">+{cart?.length || 0}</div></Link></li>
+    <input type="text" placeholder="Search Product " className="input input-bordered w-24 md:w-auto" />
+    {
+            user ? <>
+                <button onClick={handleLogOut} className="btn btn-ghost">LogOut</button>
+            </> : <>
+                <li><Link to="/login"><RiAdminLine></RiAdminLine>  Account</Link></li>
+            </>
+        }
+    <li className="font-bold"><Link to="/carts"><FaShoppingCart></FaShoppingCart>Cart<div className="badge badge-secondary">+{cart?.length || 0}</div></Link></li>
 
   </>
   return (
     <div>
       <div className="md:flex justify-between bg-green-900 px-4 py-2 text-white">
         <div className="md:flex">
-        <FaPhone></FaPhone>
-        <p> +00123456789 </p>
+          <FaPhone></FaPhone>
+          <p> +00123456789 </p>
         </div>
-        
+
         <p>Get 50% Off On Selected Items | Shop Now</p>
         <div className="md:flex">
-        <p>Eng </p>
-        <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
-        <p>Location </p>
-        <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
+          <p>Eng </p>
+          <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
+          <p>Location </p>
+          <MdOutlineKeyboardArrowDown></MdOutlineKeyboardArrowDown>
 
         </div>
-        
-        
+
+
 
       </div>
       {/*Navbar  */}

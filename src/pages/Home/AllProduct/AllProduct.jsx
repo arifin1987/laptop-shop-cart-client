@@ -66,7 +66,7 @@ const AllProduct = ({product}) => {
             </div>
             <div className="flex justify-between ">
             <h1 className="font-bold">{model}</h1>
-            <p className="font-bold">{price}</p>
+            <p className="font-bold">${price}</p>
 
             </div>
 
